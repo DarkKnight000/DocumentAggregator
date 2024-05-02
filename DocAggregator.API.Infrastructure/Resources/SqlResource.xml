@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE ArrayOfSqlQuery [
+	<!ELEMENT ArrayOfSqlQuery (SqlQuery*)>
+	<!ELEMENT SqlQuery (#PCDATA)>
+	<!ATTLIST SqlQuery name CDATA #REQUIRED>
+	<!ATTLIST SqlQuery obsolete CDATA #IMPLIED>
+]>
+<!--
+P - procedures, end with ';'
+Q - queries, end without ';'
+-->
+<ArrayOfSqlQuery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SqlQuery name="P_SQLErrorIndexRetrieve">
+DECLARE
+	c        INTEGER := DBMS_SQL.open_cursor();
+	errorpos integer := -1;
+BEGIN
+	BEGIN
+		DBMS_SQL.parse(c, :sqltext, DBMS_SQL.native);
+	EXCEPTION
+		WHEN OTHERS THEN
+			errorpos := DBMS_SQL.LAST_ERROR_POSITION();
+	END;
+	:errorpos := errorpos;
+	DBMS_SQL.close_cursor(c);
+END;
+	</SqlQuery>
+</ArrayOfSqlQuery>

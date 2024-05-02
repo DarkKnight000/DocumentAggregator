@@ -1,0 +1,23 @@
+﻿<!ELEMENT DataSource (Collection | Table | Query)*>
+<!ATTLIST DataSource documentKind CDATA #REQUIRED>
+
+<!ELEMENT Collection (Collection | Table | Query)*>
+<!ATTLIST Collection name CDATA #REQUIRED>
+
+<!ELEMENT Table (For, Get+)>
+<!ATTLIST Table name CDATA #REQUIRED>
+
+<!ELEMENT For (#PCDATA)>
+<!ATTLIST For lable CDATA #IMPLIED>
+<!ATTLIST For arguments CDATA #IMPLIED>
+<!ATTLIST For itemIndexColumn CDATA #IMPLIED>
+
+<!ELEMENT Get (Query)>
+<!ATTLIST Get name CDATA #REQUIRED>
+
+<!ELEMENT Query (#PCDATA)>
+<!ATTLIST Query for CDATA #IMPLIED>
+<!ATTLIST Query arguments CDATA #IMPLIED>
+<!ATTLIST Query itemIndexColumn CDATA #IMPLIED>
+<!ATTLIST Query keyColumn CDATA #IMPLIED>
+<!ATTLIST Query valColumn CDATA #IMPLIED>
